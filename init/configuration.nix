@@ -17,6 +17,7 @@
       ./common/network.nix
       ./common/boot.nix
       ./common/i18n.nix
+      ./common/x11.nix
       
       # Environment Configuration
       ./secret/users.nix

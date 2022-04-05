@@ -7,7 +7,7 @@
 
   # Set hostname and domain if necessary
   networking.hostName = "MyGensouNix";
-  # networking.domain = "mygensou.cn";
+  networking.domain = "mygensou.cn";
 
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";

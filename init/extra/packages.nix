@@ -1,22 +1,26 @@
 # Package Manager Settings
 { config, pkgs, ... }:
 
+
 {  
+  #External Package imports
+  imports = [
+    ./docker.nix # Container Service
+    # Virtuallization Support for both Guest and Hypervisior
+    ./vmguest.nix # Guest Support
+    # ./hypervisior.nix # Hypervisior Support
+  ];
 
   # Install Basic Programs
   programs.bash.enable = true;
-  
-  # Determine the type of the hypervisior
-  # If you are running in virtual machine
-  # please select the correct guest type.
-  # VMware, VirtualBox and Hyper-V are supported.
-
-  virtualisation.vmware.guest.enable = true; # VMware Workstation or ESXi
-  # virtualisation.virtualbox.guest.enable = true; # Oracle VirtualBox
-  # virtualisation.hypervGuest.enable = true; # Microsoft Hyper-V
+  programs.htop.enable = true;
   
   # Install External Programs
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
   programs.thefuck.enable = true;
   programs.java.enable = true;
   programs.less.enable = true;
@@ -24,12 +28,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # i do not use wim so i install it here owo
+    vim
     wget
     vlc
     nano
     fish
-    htop
     tldr
     gparted
     firefox
@@ -40,6 +43,8 @@
     ffmpeg
     google-chrome
     utillinux
+    coreutils
+    openssl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
