@@ -8,37 +8,16 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      # Configure Nix
+      ./nix/binaryCaches.nix
+      ./nix/common.nix
+
+      # Initialize base system
+      ./common/network.nix
+      ./common/boot.nix
     ];
   
-  nix.binaryCaches = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
-  nixpkgs.config.allowUnfree = true;
-  # Use the GRUB 2 boot loader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
-  # Define on which hard drive you want to install Grub.
-  # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
-  boot.loader.grub.device = "nodev";
-  # networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.hostName = "MyGensouNix";
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
-  time.timeZone = "Asia/Shanghai";
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = true;
-  networking.interfaces.ens33.useDHCP = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Select internationalisation properties.
   # i18n.defaultLocale = "zh_CN.UTF-8";
   console = {
@@ -51,9 +30,8 @@
     fontDir.enable = true;
     fonts = with pkgs; [
       noto-fonts
-      noto-fonts-cjk
-      # wqy-microhei
-      sarasa-gothic  #更纱黑体
+      noto-fonts-cjk # Package renamed
+      sarasa-gothic  # 更纱黑体
       source-code-pro
       hack-font
       jetbrains-mono
@@ -75,7 +53,7 @@
     #   fcitx5-chinese-addons
     # ];
 
-    # 我现在用 ibus
+    # use ibus instead
     enabled = "ibus";
     ibus.engines = with pkgs.ibus-engines; [
       libpinyin
@@ -116,13 +94,10 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
-    open-vm-tools
     vlc
     nano
-    bash
     fish
     htop
-    wget
     tldr
     gparted
     firefox
@@ -132,9 +107,7 @@
     rhythmbox
     ffmpeg
     google-chrome
-    steam
     utillinux
-  #    nix-search
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -144,17 +117,26 @@
     enable = true;
     enableSSHSupport = true;
   };
-
+  
+  # Install Basic Programs
+  programs.bash.enable = true;
+  
+  # Determine the type of the hypervisior
+  # VMware, VirtualBox and Hyper-V are supported.
+  virtualisation.vmware.guest.enable = true;
+  # virtualisation.virtualbox.guest.enable = true;
+  # virtualisation.hypervGuest.enable = true;
+  
+  # Container Configuration
+  virtualisation.docker.enable = true;
+  
+  # Install External Programs
+  programs.steam.enable = true;
+  programs.thefuck.enable = true;
+  programs.java.enable = true;
+  programs.less.enable = true;
+  
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
