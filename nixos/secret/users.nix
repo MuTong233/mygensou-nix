@@ -3,8 +3,6 @@
 { pkgs, ... }:
 
 {
-  # Enable home manager
-  programs.home-manager.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # To generate your own password, 'use openssl password -6'
   # or 'mkpasswd -m sha-512'

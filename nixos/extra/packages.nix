@@ -39,6 +39,7 @@
     libreoffice
     remmina
     noto-fonts-cjk
+    home-manager
     rhythmbox
     ffmpeg
     google-chrome

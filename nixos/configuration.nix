@@ -21,6 +21,9 @@
       
       # Environment Configuration
       ./secret/users.nix
+
+      # Package Configuration
+      ./extra/packages.nix
     ];
 
   # List services that you want to enable:

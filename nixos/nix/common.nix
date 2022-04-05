@@ -1,4 +1,4 @@
-{ inputs, self, ... }:
+{ inputs, ... }:
 {
   # https://nixos.org/manual/nixpkgs/stable/#submitting-changes-tested-with-sandbox
   # nix.useSandbox = true;
@@ -12,9 +12,4 @@
   # Allow non-free programs to be installed
   nixpkgs.config.allowUnfree = true;
   
-  # NickCao/flakes | flakes/nixos/local/default.nix
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-  nix.registry."p".flake = self;
-
-  nixFlakes.enable = true;
 }
