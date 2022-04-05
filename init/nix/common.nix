@@ -16,6 +16,5 @@
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   nix.registry."p".flake = self;
 
-  imports = [ "${inputs.Vanilla}/nixFlakes.nix" ];
   nixFlakes.enable = true;
 }
