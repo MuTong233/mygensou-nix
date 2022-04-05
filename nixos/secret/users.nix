@@ -3,7 +3,11 @@
 { pkgs, ... }:
 
 {
-
+  # Enable home manager
+  programs.home-manager.enable = true;
+  home.stateVersion = "21.11";
+  home.username = "mutong233";
+  home.homeDirectory = "/home/mutong233";
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # To generate your own password, 'use openssl password -6'
   # or 'mkpasswd -m sha-512'
