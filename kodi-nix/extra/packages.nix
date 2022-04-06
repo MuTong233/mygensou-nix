@@ -5,10 +5,8 @@
 {  
   #External Package imports
   imports = [
-    ./docker.nix # Container Service
-    # Virtuallization Support for both Guest and Hypervisior
+    # Virtuallization Support
     ./vmguest.nix # Guest Support
-    # ./hypervisior.nix # Hypervisior Support
   ];
 
   # Install Basic Programs
@@ -21,7 +19,6 @@
     dedicatedServer.openFirewall = true;
   };
   programs.thefuck.enable = true;
-  programs.java.enable = true;
   programs.less.enable = true;
 
   # List packages installed in system profile. To search, run:
@@ -29,19 +26,12 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
-    vlc
     nano
     fish
     tldr
-    gparted
-    firefox
-    libreoffice
-    remmina
     noto-fonts-cjk
     home-manager
-    rhythmbox
     ffmpeg
-    google-chrome
     utillinux
     coreutils
     openssl
